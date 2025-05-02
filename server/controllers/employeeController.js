@@ -115,7 +115,7 @@ const editEmployee = async (req, res) => {
             }
             const updatedUser = await User.findByIdAndUpdate({_id: employee.userId}, {name, email})
 
-            const updatedEmployee = await User.findByIdAndUpdate({_id: id}, {
+            const updatedEmployee = await Employee.findByIdAndUpdate({_id: id}, {
                 employeeId,
                 maritalStatus,
                 designation,

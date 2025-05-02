@@ -3,6 +3,7 @@ import authRouter from './routes/auth.js'
 import assetRouter from './routes/asset.js'
 import employeeRouter from './routes/employee.js'
 import departmentRouter from './routes/department.js'
+import assignRouter from './routes/assign.js'
 import cors from 'cors'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -18,6 +19,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/asset', assetRouter)
 app.use('/api/employee', employeeRouter)
 app.use('/api/department', departmentRouter)
+app.use('/api/assign', assignRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running at ${process.env.PORT}`);
