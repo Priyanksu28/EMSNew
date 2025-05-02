@@ -1,0 +1,25 @@
+import express from 'express';
+import authRouter from './routes/auth.js'
+import assetRouter from './routes/asset.js'
+import employeeRouter from './routes/employee.js'
+import departmentRouter from './routes/department.js'
+import cors from 'cors'
+import dotenv from 'dotenv'
+dotenv.config()
+import connectToDatabase from './db/db.js'
+connectToDatabase()
+
+
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use(express.static('public/assetuploads'))
+app.use('/api/auth', authRouter)
+app.use('/api/asset', assetRouter)
+app.use('/api/employee', employeeRouter)
+app.use('/api/department', departmentRouter)
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running at ${process.env.PORT}`);
+    
+})
