@@ -16,6 +16,7 @@ import EditDepartment from './components/departments/EditDepartment'
 import View from './components/employee/View'
 import Edit from './components/employee/Edit'
 import AddAssign from './components/assign/Add'
+import ViewAssign from './components/assign/View'
 
 function App() {
   
@@ -51,6 +52,7 @@ function App() {
           <Route path='/admin-dashboard/employees/add-employee' element={<Add />}></Route>
           <Route path='/admin-dashboard/employees/:id' element={<View />}></Route>
           <Route path='/admin-dashboard/employees/edit/:id' element={<Edit />}></Route>
+          <Route path='/admin-dashboard/employees/assign/:id' element={<ViewAssign />}></Route>
 
 
 
