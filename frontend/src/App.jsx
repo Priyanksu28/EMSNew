@@ -17,11 +17,14 @@ import View from './components/employee/View'
 import Edit from './components/employee/Edit'
 import AddAssign from './components/assign/Add'
 import ViewAssign from './components/assign/View'
+import AuthContext from './context/authContext'
+import Summary from './components/EmployeeDashboard/Summary'
 
 function App() {
   
 
   return (
+    <AuthContext>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navigate to="/admin-dashboard"/>}></Route>
@@ -69,9 +72,17 @@ function App() {
             </RoleBasedRoutes>
           </PrivateRoutes>
 
-          }></Route>
+          }>
+
+
+          <Route index element={<Summary />}></Route>
+          <Route path='/employee-dashboard/profile/:id' element={<View />}></Route>
+
+
+        </Route>
       </Routes>
     </BrowserRouter>
+    </AuthContext>
   )
 }
 
