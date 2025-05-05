@@ -1,0 +1,32 @@
+import Issue from "../models/Issue.js"
+import Employee from "../models/Employee.js"
+
+
+
+const addIssue = async (req, res) => {
+    try {
+        const {userId, issueType, assetId, appliedDate, reason} = req.body
+        const employee = await Employee.findOne({userId})
+
+        if (!employee) {
+            return res.status(404).json({ success: false, error: "Employee not found" });
+        }
+        
+        
+        const newIssue = new Issue({
+            employeeId: employee._id, issueType, assetId, appliedDate, reason
+        })
+
+        await newIssue.save()
+        console.log(newIssue);
+
+        return res.status(200).json({success: true})
+
+    } catch (error) {
+        console.log(error.message);
+        
+        return res.status(500).json({success: false, error: "Server Error"})
+    }
+}
+
+export {addIssue}

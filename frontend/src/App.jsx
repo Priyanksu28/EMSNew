@@ -19,6 +19,8 @@ import AddAssign from './components/assign/Add'
 import ViewAssign from './components/assign/View'
 import AuthContext from './context/authContext'
 import Summary from './components/EmployeeDashboard/Summary'
+import IssueList from './components/issue/List'
+import AddIssue from './components/issue/Add'
 
 function App() {
   
@@ -77,6 +79,10 @@ function App() {
 
           <Route index element={<Summary />}></Route>
           <Route path='/employee-dashboard/profile/:id' element={<View />}></Route>
+
+
+          <Route path='/employee-dashboard/issues' element={<IssueList />}></Route>
+          <Route path='/employee-dashboard/issues/add-issue' element={<AddIssue />}></Route>
 
 
         </Route>

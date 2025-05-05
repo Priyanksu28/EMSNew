@@ -26,11 +26,11 @@ const Sidebar = () => {
                   }>
                 <span>My Profile</span>
             </NavLink>
-            <NavLink to='/employee-dashboard/leaves'
+            <NavLink to='/employee-dashboard/issues'
                 className={({ isActive }) =>
                     `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`
                   }>
-                <span>Leaves</span>
+                <span>Issues</span>
             </NavLink>
             <NavLink to='/employee-dashboard/assign'
                 className={({ isActive }) =>

@@ -38,7 +38,7 @@ const AdminSidebar = () => {
             </NavLink>
             <NavLink to='/admin-dashboard'
                 className="flex items-center space-x-4 block py-2.5 px-4 rounded">
-                <span>Leaves</span>
+                <span>Issues</span>
             </NavLink>
             <NavLink to='/admin-dashboard/assign/add'
                 className={({ isActive }) =>
