@@ -50,7 +50,7 @@ const Add = () => {
                         required
                     >
                         <option value="">Select Issue</option>
-                        <option value="damaged">Damaged</option>
+                        <option value="Damaged">Damaged</option>
                         <option value="Software Issue">Software Issue</option>
                     </select>
                 </div>

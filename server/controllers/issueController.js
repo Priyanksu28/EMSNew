@@ -29,4 +29,18 @@ const addIssue = async (req, res) => {
     }
 }
 
-export {addIssue}
+const getIssues = async (req, res) => {
+    try {
+        const {id} = req.params
+        const employee = await Employee.findOne({userId: id})
+
+        const issues = await Issue.find({employeeId: employee._id})
+        return res.status(200).json({success: true, issues})
+
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({success: false, error: "Server Error"})
+    }
+}
+
+export {addIssue, getIssues}

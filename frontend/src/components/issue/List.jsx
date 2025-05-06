@@ -1,7 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/authContext';
+import axios from 'axios';
 
 const List = () => {
+
+  const {user} = useAuth()
+  const [issues, setIssues] = useState([])
+  let sno = 1
+
+  const fetchIssues = async () => {
+    try {
+        const response = await axios.get(`http://localhost:3000/api/issue/${user._id}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
+        });
+        console.log(response.data.assign);
+
+        if (response.data.success) {
+            setIssues(response.data.issues)
+        }
+        
+    } catch (error) {
+        if (error.response && !error.response.data.success) {
+            alert(error.message)
+        }
+    }
+  };
+
+  useEffect(() => {
+    fetchIssues();
+  }, [])
+
   return (
     <div className='p-5'>
           <div className='text-center'>
@@ -15,6 +46,36 @@ const List = () => {
             />
             <Link className='px-4 py-1 bg-teal-600 rounded text-white' to="/employee-dashboard/issues/add-issue">Add New Issue</Link>
           </div>
+
+          <table className="w-full text-sm text-left text-gray-500 mt-6">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 border border-gray-200">
+                    <tr>
+                        <th className="px-6 py-3">SNo</th>
+                        <th className="px-6 py-3">Issue Type</th>
+                        <th className="px-6 py-3">Asset ID</th>
+                        <th className="px-6 py-3">Applied Date</th>
+                        <th className="px-6 py-3">Description</th>
+                        <th className="px-6 py-3">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {issues.map((issue) => (
+                        <tr
+                            key={issue._id}
+                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        >
+                            <td>{sno++}</td>
+                            <td>{issue.issueType}</td>
+                            <td>{issue.assetId}</td>
+                            <td>{new Date(issue.appliedDate).toLocaleDateString()}</td>
+                            <td>{issue.reason}</td>
+                            <td>{issue.status}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+
         </div>
   )
 }

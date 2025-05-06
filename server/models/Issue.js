@@ -6,7 +6,8 @@ const issueSchema = new Schema({
     issueType: { type: String, enum: ['Damaged', 'Software Issue'], required: true },
     assetId: { type: String, required: true },
     appliedDate: { type: Date, required: true },
-    status: { type: String, enum: ['Working', 'Approved', 'Cleared'] , default: 'Cleared' },
+    reason: {type: String, required: true},
+    status: { type: String, enum: ['Working...', 'Approved', 'Solved', 'Clear'] , default: 'Clear' },
     appliedAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now}
 })
