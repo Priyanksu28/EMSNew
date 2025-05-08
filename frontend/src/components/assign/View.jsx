@@ -65,7 +65,6 @@ const View = () => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 border border-gray-200">
                     <tr>
                         <th className="px-6 py-3">SNo</th>
-                        <th className="px-6 py-3">Employee ID</th>
                         <th className="px-6 py-3">Asset ID</th>
                         <th className="px-6 py-3">Assign Date</th>
                     </tr>
@@ -77,10 +76,9 @@ const View = () => {
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         >
                             <td>{sno++}</td>
-                            <td>{assign.employeeId.employeeId}</td>
                             <td>{assign.assetId.assetId}</td>
                             <td>{new Date(assign.assignDate).toLocaleDateString()}</td>
-                            <button>View</button>
+                            
                         </tr>
                     ))}
                 </tbody>

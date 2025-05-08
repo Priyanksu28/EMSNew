@@ -21,6 +21,7 @@ import AuthContext from './context/authContext'
 import Summary from './components/EmployeeDashboard/Summary'
 import IssueList from './components/issue/List'
 import AddIssue from './components/issue/Add'
+import Setting from './components/EmployeeDashboard/Setting'
 
 function App() {
   
@@ -83,6 +84,8 @@ function App() {
 
           <Route path='/employee-dashboard/issues' element={<IssueList />}></Route>
           <Route path='/employee-dashboard/issues/add-issue' element={<AddIssue />}></Route>
+          <Route path='/employee-dashboard/assign/:id' element={<ViewAssign />}></Route>
+          <Route path='/employee-dashboard/setting' element={<Setting />}></Route>
 
 
         </Route>

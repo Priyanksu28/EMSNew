@@ -32,13 +32,13 @@ const Sidebar = () => {
                   }>
                 <span>Issues</span>
             </NavLink>
-            <NavLink to='/employee-dashboard/assign'
+            <NavLink to={`/employee-dashboard/assign/${user._id}`}
                 className={({ isActive }) =>
                     `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`
                   }>
                 <span>Asset Assign</span>
             </NavLink>
-            <NavLink to='/employee-dashboard/seeting'
+            <NavLink to='/employee-dashboard/setting'
                 className={({ isActive }) =>
                     `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`
                   }>

@@ -1,4 +1,5 @@
 import Assign from "../models/Assign.js"
+import Employee from "../models/Employee.js"
 
 
 const addAssign = async (req, res) =>{
@@ -23,7 +24,12 @@ const addAssign = async (req, res) =>{
 const getAssign = async (req, res) => {
     try {
         const {id} = req.params
-        const assign = await Assign.find({employeeId: id}).populate('employeeId', 'employeeId').populate('assetId', 'assetId');
+        let assign
+        assign = await Assign.find({employeeId: id}).populate('employeeId', 'employeeId')
+        if (!assign || assign.length < 1) {
+            const employee = await Employee.findOne({userId: id})
+            assign = await Assign.find({employeeId: employee._id}).populate('employeeId', 'employeeId')
+        }
         return res.status(200).json({success: true, assign})
     } catch (error) {
         return res.status(500).json({success: false, error: "Server Error"})

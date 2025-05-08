@@ -5,6 +5,7 @@ import employeeRouter from './routes/employee.js'
 import departmentRouter from './routes/department.js'
 import assignRouter from './routes/assign.js'
 import issueRouter from './routes/issue.js'
+import settingRouter from './routes/setting.js'
 import cors from 'cors'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -22,6 +23,7 @@ app.use('/api/employee', employeeRouter)
 app.use('/api/department', departmentRouter)
 app.use('/api/assign', assignRouter)
 app.use('/api/issue', issueRouter)
+app.use('/api/setting', settingRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running at ${process.env.PORT}`);

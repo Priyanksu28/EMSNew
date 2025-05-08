@@ -97,7 +97,7 @@ export const EmployeeButton = ({Id}) => {
             >Assignment</button>
             <button className="px-1 py-1 bg-red-600 text-white"
                 
-            >Leave</button>
+            >Issues</button>
             <button className="px-1 py-1 bg-red-600 text-white"
                 
             >Delete</button>
