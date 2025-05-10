@@ -22,6 +22,8 @@ import Summary from './components/EmployeeDashboard/Summary'
 import IssueList from './components/issue/List'
 import AddIssue from './components/issue/Add'
 import Setting from './components/EmployeeDashboard/Setting'
+import Table from './components/issue/Table'
+import Detail from './components/issue/Detail'
 
 function App() {
   
@@ -61,8 +63,11 @@ function App() {
           <Route path='/admin-dashboard/employees/assign/:id' element={<ViewAssign />}></Route>
 
 
-
           <Route path='/admin-dashboard/assign/add' element={<AddAssign />}></Route>
+
+
+          <Route path='/admin-dashboard/issues' element={<Table />}></Route>
+          <Route path='/admin-dashboard/issues/:id' element={<Detail />}></Route>
 
           </Route>
 

@@ -8,7 +8,8 @@ export const columns = [
     },
     {
         name: "Asset Id",
-        selector: (row) => row.assetId
+        selector: (row) => row.assetId,
+        sortable: true
     },
     {
         name: "Model No",

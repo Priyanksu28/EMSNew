@@ -29,7 +29,7 @@ const addIssue = async (req, res) => {
     }
 }
 
-const getIssues = async (req, res) => {
+const getIssue = async (req, res) => {
     try {
         const {id} = req.params
         const employee = await Employee.findOne({userId: id})
@@ -43,4 +43,69 @@ const getIssues = async (req, res) => {
     }
 }
 
-export {addIssue, getIssues}
+const getIssues = async (req, res) => {
+    try {
+        const issues = await Issue.find().populate({
+            path: 'employeeId',
+            populate: [
+                {
+                    path: 'department',
+                    select: 'department_name'
+                },
+                {
+                    path: 'userId',
+                    select: 'name'
+                }
+                
+            ]
+        })
+
+    return res.status(200).json({success: true, issues})
+
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({success: false, error: "Server Error"})
+    }
+}
+
+const getIssueDetail = async (req, res) => {
+    try {
+        const {id} = req.params
+        const issue = await Issue.findById({_id: id}).populate({
+            path: 'employeeId',
+            populate: [
+                {
+                    path: 'department',
+                    select: 'department_name'
+                },
+                {
+                    path: 'userId',
+                    select: 'name email'
+                }
+                
+            ]
+        })
+
+        return res.status(200).json({success: true, issue})
+
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({success: false, error: "Server Error"})
+    }
+}
+
+const updateIssue = async (req, res) => {
+    try {
+        const {id} = req.params
+        const issue = await Issue.findByIdAndUpdate({_id: id}, {status: req.body.status})
+        if(!issue) {
+            return res.status(404).json({success: false, error: "Issue not found"})
+        }
+        return res.status(200).json({success: true})
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({success: false, error: "Server Error"})
+    }
+}
+
+export {addIssue, getIssue, getIssues, getIssueDetail, updateIssue}
