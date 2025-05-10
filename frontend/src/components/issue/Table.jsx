@@ -9,6 +9,7 @@ import { IssueButton } from '../../utils/IssueHelper'
 const Table = () => {
 
     const [issues, setIssues] = useState(null)
+    const [filteredIssues, setFilteredIssues] = useState(null)
 
     const fetchIssues = async () => {
         try {
@@ -35,6 +36,7 @@ const Table = () => {
                 }
               ))
               setIssues(data)
+              setFilteredIssues(data)
             }
           }
           catch(error) {
@@ -48,10 +50,17 @@ const Table = () => {
       fetchIssues()
     }, [])
 
+    const filterByChange = (e) => {
+      const data = issues.filter((issue) => 
+        issue.employeeId.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+      setFilteredIssues(data)
+    }
+
 
   return (
     <>
-    {issues ? (
+    {filteredIssues ? (
     <div className='p-6'>
       <div className='text-center'>
             <h3 className='text-2xl font-bold'>Manage Issues</h3>
@@ -61,6 +70,7 @@ const Table = () => {
                 className='px-4 py-0.5 border' 
                 type="text" 
                 placeholder='Search By'
+                onChange={filterByChange}
             />
             <div>
                 <button className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700 mr-3'>Working...</button>
@@ -72,7 +82,7 @@ const Table = () => {
             
           </div>
           <div className='mt-3'>
-            <DataTable columns={columns} data={issues} pagination/>
+            <DataTable columns={columns} data={filteredIssues} pagination/>
           </div>
     </div>
     ) : <div>Loading...</div>}
