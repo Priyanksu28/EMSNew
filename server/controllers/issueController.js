@@ -32,9 +32,12 @@ const addIssue = async (req, res) => {
 const getIssue = async (req, res) => {
     try {
         const {id} = req.params
-        const employee = await Employee.findOne({userId: id})
-
-        const issues = await Issue.find({employeeId: employee._id})
+        let issues = await Issue.find({employeeId: id})
+        if (!issues) {
+            const employee = await Employee.findOne({userId: id})
+            issues = await Issue.find({employeeId: employee._id})
+        }
+        
         return res.status(200).json({success: true, issues})
 
     } catch (error) {

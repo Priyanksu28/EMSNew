@@ -68,6 +68,10 @@ function App() {
 
           <Route path='/admin-dashboard/issues' element={<Table />}></Route>
           <Route path='/admin-dashboard/issues/:id' element={<Detail />}></Route>
+          <Route path='/admin-dashboard/employees/issues/:id' element={<IssueList />}></Route>
+
+
+          <Route path='/admin-dashboard/setting' element={<Setting />}></Route>
 
           </Route>
 
@@ -87,7 +91,7 @@ function App() {
           <Route path='/employee-dashboard/profile/:id' element={<View />}></Route>
 
 
-          <Route path='/employee-dashboard/issues' element={<IssueList />}></Route>
+          <Route path='/employee-dashboard/issues/:id' element={<IssueList />}></Route>
           <Route path='/employee-dashboard/issues/add-issue' element={<AddIssue />}></Route>
           <Route path='/employee-dashboard/assign/:id' element={<ViewAssign />}></Route>
           <Route path='/employee-dashboard/setting' element={<Setting />}></Route>

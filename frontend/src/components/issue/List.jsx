@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/authContext';
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
+import { useAuth } from '../../context/authContext';
 
 const List = () => {
 
-  const {user} = useAuth()
-  const [issues, setIssues] = useState([])
+  const [issues, setIssues] = useState(null)
   let sno = 1
+  const {id} = useParams()
+  const {user} = useAuth()
+  
 
   const fetchIssues = async () => {
     try {
-        const response = await axios.get(`http://localhost:3000/api/issue/${user._id}`, {
+        const response = await axios.get(`http://localhost:3000/api/issue/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             }
         });
-        console.log(response.data.assign);
+        console.log(response.data);
+
 
         if (response.data.success) {
             setIssues(response.data.issues)
@@ -33,6 +36,10 @@ const List = () => {
     fetchIssues();
   }, [])
 
+  if (!issues) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className='p-5'>
           <div className='text-center'>
@@ -44,7 +51,9 @@ const List = () => {
                 type="text" 
                 placeholder='Search By' 
             />
+            {user.role === 'employee' && 
             <Link className='px-4 py-1 bg-teal-600 rounded text-white' to="/employee-dashboard/issues/add-issue">Add New Issue</Link>
+            }
           </div>
 
           <table className="w-full text-sm text-left text-gray-500 mt-6">

@@ -48,8 +48,10 @@ const AdminSidebar = () => {
                 }>
                 <span>Asset Assign</span>
             </NavLink>
-            <NavLink to='/admin-dashboard'
-                className="flex items-center space-x-4 block py-2.5 px-4 rounded">
+            <NavLink to='/admin-dashboard/setting'
+                className={({ isActive }) =>
+                  `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`
+                }>
                 <span>Seetings</span>
             </NavLink>
         </div>

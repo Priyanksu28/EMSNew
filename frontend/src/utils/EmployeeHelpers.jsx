@@ -86,7 +86,7 @@ export const EmployeeButton = ({Id}) => {
 
     return (
         <div className="flex space-x-3">
-            <button className="px-3 py-1 bg-teal-600 text-white"
+            <button className="px-1 py-1 bg-teal-600 text-white"
                 onClick={() => navigate(`/admin-dashboard/employees/${Id}`)}
             >View</button>
             <button className="px-1 py-1 bg-yellow-600 text-white"
@@ -96,9 +96,9 @@ export const EmployeeButton = ({Id}) => {
                 onClick={() => navigate(`/admin-dashboard/employees/assign/${Id}`)}
             >Assignment</button>
             <button className="px-1 py-1 bg-red-600 text-white"
-                
+                onClick={() => navigate(`/admin-dashboard/employees/issues/${Id}`)}
             >Issues</button>
-            <button className="px-1 py-1 bg-red-600 text-white"
+            <button className="px-0.8 py-1 bg-red-600 text-white"
                 
             >Delete</button>
         </div>
