@@ -25,10 +25,10 @@ const getAssign = async (req, res) => {
     try {
         const {id} = req.params
         let assign
-        assign = await Assign.find({employeeId: id}).populate('employeeId', 'employeeId')
+        assign = await Assign.find({employeeId: id}).populate('employeeId', 'employeeId').populate('assetId', 'assetId');
         if (!assign || assign.length < 1) {
             const employee = await Employee.findOne({userId: id})
-            assign = await Assign.find({employeeId: employee._id}).populate('employeeId', 'employeeId')
+            assign = await Assign.find({employeeId: employee._id}).populate('employeeId', 'employeeId').populate('assetId', 'assetId')
         }
         return res.status(200).json({success: true, assign})
     } catch (error) {

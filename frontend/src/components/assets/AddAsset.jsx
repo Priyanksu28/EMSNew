@@ -118,7 +118,7 @@ const Add = () => {
               onChange={handleChange} 
               placeholder='Upload Image'
               accept='image/*'
-              required/>
+              />
             </div>
           </div>
           {/* Button */}
