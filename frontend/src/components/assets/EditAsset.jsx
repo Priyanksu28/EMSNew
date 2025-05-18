@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchDepartments } from '../../utils/EmployeeHelpers'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const Edit = () => {
   const [departments, setDepartments] = useState([])
@@ -82,9 +83,11 @@ const Edit = () => {
       if (response.data.success) {
         navigate('/admin-dashboard/assets')
       }
+      toast.success("Edited")
     } catch (error) {
       if (error.response && !error.response.data.success) {
-        alert(error.response.data.error)
+        toast.error("Failed")
+        // alert(error.response.data.error)
       }
     }
   }
@@ -94,7 +97,7 @@ const Edit = () => {
   return (
     <>{departments && asset ? (
     <div className='max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md'>
-      <h2 className='text-2xl font-bold mb-6'>Edit Employee</h2>
+      <h2 className='text-2xl font-bold mb-6'>Edit Asset</h2>
         <form action="" onSubmit={handleSubmit}>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {/* Asset ID */}
@@ -153,7 +156,7 @@ const Edit = () => {
             </div>
           </div>
           {/* Button */}
-          <button className='w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded' type="submit">Edit Employee</button>
+          <button className='w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded' type="submit">Edit Asset</button>
         </form> 
     </div>
     ) : <div>Loading...</div>}</>

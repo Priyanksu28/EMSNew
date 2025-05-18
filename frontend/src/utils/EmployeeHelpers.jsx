@@ -81,8 +81,33 @@ export const getEmployees = async (id) => {
 }
 
 
-export const EmployeeButton = ({Id}) => {
+export const EmployeeButton = ({Id, onEmployeeDelete}) => {
     const navigate = useNavigate()
+
+    const handledelete = async (id) => {
+        const confirm = window.confirm("Do you want to delete ?")
+        if (confirm) {
+            try {
+                const response = await axios.delete(`http://localhost:3000/api/employee/${id}`, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                      }
+                      
+                })
+                console.log("Response data from backend:", response.data);
+                if (response.data.success) {
+                    onEmployeeDelete(id)
+                }
+              }
+              catch(error) {
+                if(error.response && !error.response.data.success) {
+                  alert(error.response.data.error)
+                }
+              } 
+        }
+
+        
+    }
 
     return (
         <div className="flex space-x-3">
@@ -99,7 +124,7 @@ export const EmployeeButton = ({Id}) => {
                 onClick={() => navigate(`/admin-dashboard/employees/issues/${Id}`)}
             >Issues</button>
             <button className="px-0.8 py-1 bg-red-600 text-white"
-                
+                onClick={() => handledelete(Id)}
             >Delete</button>
         </div>
     )

@@ -31,20 +31,24 @@ const addIssue = async (req, res) => {
 
 const getIssue = async (req, res) => {
     try {
-        const {id} = req.params
-        let issues = await Issue.find({employeeId: id})
-        if (!issues) {
-            const employee = await Employee.findOne({userId: id})
-            issues = await Issue.find({employeeId: employee._id})
+        const { id } = req.params;
+
+        // Find the employee by userId
+        const employee = await Employee.findOne({ userId: id });
+        if (!employee) {
+            return res.status(404).json({ success: false, error: "Employee not found" });
         }
-        
-        return res.status(200).json({success: true, issues})
+
+        // Now get issues for this employee
+        const issues = await Issue.find({ employeeId: employee._id });
+
+        return res.status(200).json({ success: true, issues });
 
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({success: false, error: "Server Error"})
+        return res.status(500).json({ success: false, error: "Server Error" });
     }
-}
+};
 
 const getIssues = async (req, res) => {
     try {

@@ -141,6 +141,19 @@ const editEmployee = async (req, res) => {
 };
 
 
+const deleteEmployee = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const deletedEmployee = await Employee.findByIdAndDelete({_id: id})
+
+        return res.status(200).json({success: true, deletedEmployee});
+    } catch (error) {
+        console.error("Error updating asset:", error);
+        return res.status(500).json({success: false, error: "Server Error while deleting asset"});
+    }
+}
+
+
 const fetchEmployeesByDepId = async (req, res) => {
     const {id} = req.params
 
@@ -152,4 +165,4 @@ const fetchEmployeesByDepId = async (req, res) => {
     }
 }
 
-export {addEmployee, upload, getEmployees, getEmployee, editEmployee, fetchEmployeesByDepId}
+export {addEmployee, upload, getEmployees, getEmployee, editEmployee, deleteEmployee, fetchEmployeesByDepId}

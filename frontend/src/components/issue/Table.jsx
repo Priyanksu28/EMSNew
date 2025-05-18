@@ -26,10 +26,10 @@ const Table = () => {
                 {
                   _id: isu._id,
                   sno: sno++,
-                  employeeId: isu.employeeId.employeeId,
-                  department_name: isu.employeeId.department.department_name || "N/A",
+                  employeeId: isu.employeeId?.employeeId || 'N/A',
+                  department_name: isu.employeeId?.department?.department_name || 'N/A',
                   issueType: isu.issueType,
-                  name: isu.employeeId.userId.name,
+                  name: isu.employeeId?.userId?.name || 'N/A',
                   appliedDate: new Date(isu.appliedDate).toLocaleDateString(),
                   status: isu.status,
                   action: (<IssueButton Id={isu._id}/>)

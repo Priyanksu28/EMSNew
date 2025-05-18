@@ -8,6 +8,7 @@ import AdminSummary from './components/dashboard/AdminSummary'
 import AssetList from './components/assets/AssetList'
 import AddAsset from './components/assets/AddAsset'
 import EditAsset from './components/assets/EditAsset'
+import ViewAsset from './components/assets/ViewAsset'
 import List from './components/employee/List'
 import Add from './components/employee/Add'
 import DepartmentList from './components/departments/DepartmentList'
@@ -24,6 +25,7 @@ import AddIssue from './components/issue/Add'
 import Setting from './components/EmployeeDashboard/Setting'
 import Table from './components/issue/Table'
 import Detail from './components/issue/Detail'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   
@@ -31,6 +33,7 @@ function App() {
   return (
     <AuthContext>
     <BrowserRouter>
+    <Toaster />
       <Routes>
         <Route path='/' element={<Navigate to="/admin-dashboard"/>}></Route>
         <Route path='/login' element={<Login />}></Route>
@@ -53,6 +56,7 @@ function App() {
 
           <Route path='/admin-dashboard/assets' element={<AssetList />}></Route>
           <Route path='/admin-dashboard/assets/add-asset' element={<AddAsset />}></Route>
+          <Route path='/admin-dashboard/assets/:id' element={<ViewAsset />}></Route>
           <Route path='/admin-dashboard/asset/:id' element={<EditAsset />}></Route>
           
           

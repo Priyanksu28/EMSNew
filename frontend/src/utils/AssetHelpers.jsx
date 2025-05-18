@@ -97,6 +97,9 @@ export const AssetButton = ({Id, onAssetDelete}) => {
     
     return (
         <div className="flex space-x-3">
+            <button className="px-1 py-1 bg-teal-600 text-white"
+                onClick={() => navigate(`/admin-dashboard/assets/${Id}`)}
+            >View</button>
             <button className="px-3 py-1 bg-teal-600 text-white"
                 onClick={() => navigate(`/admin-dashboard/asset/${Id}`)}
             >Edit</button>
