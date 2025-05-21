@@ -25,15 +25,15 @@ const Add = () => {
   }, []);
 
 
-  useEffect(() => {                            //Form EmployeeHelpers
-    const getAssets = async () => {
-      const departments = await fetchDepartments();
-      setDepartments(departments);
+  // useEffect(() => {                            //Form EmployeeHelpers
+  //   const getAssets = async () => {
+  //     const departments = await fetchDepartments();
+  //     setDepartments(departments);
 
       
-    };
-    getAssets();
-  }, []);
+  //   };
+  //   getAssets();
+  // }, []);
  
   // useEffect(() => {                            //From AssetHelpers
   //   const getAssets = async () => {

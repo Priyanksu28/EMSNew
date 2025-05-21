@@ -15,7 +15,7 @@ const List = () => {
     const fetchAssets = async () => {
       setAseLoading(true)
       try {
-        const response = await axios.get('http://localhost:3000/api/asset', {
+        const response = await axios.get('http://localhost:3000/api/assets', {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
           }

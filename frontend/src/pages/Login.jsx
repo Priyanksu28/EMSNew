@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { useAuth } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
 
 const Login = () => {
 
@@ -80,7 +82,8 @@ const Login = () => {
                 <input className="form-checkbox" type="checkbox" />
                 <span className="ml-2 text-gray-700">Remember Me</span>
               </label>
-              <a className="text-teal-600" href="#">Forgot Password</a>
+              <Link className="text-teal-600" to="/forgot-password">Forgot Password</Link>
+              
             </div>
             <div className="mb-4">
               <button className="w-full bg-teal-600 text-white py-2 rounded" type="submit">Login</button>

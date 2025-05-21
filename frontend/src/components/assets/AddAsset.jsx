@@ -36,7 +36,7 @@ const Add = () => {
     })
 
     try {
-      const response = await axios.post('http://localhost:3000/api/asset/add', formDataObj, {
+      const response = await axios.post('http://localhost:3000/api/assets/add', formDataObj, {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem('token')}`
         }

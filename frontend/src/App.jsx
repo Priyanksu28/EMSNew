@@ -26,6 +26,9 @@ import Setting from './components/EmployeeDashboard/Setting'
 import Table from './components/issue/Table'
 import Detail from './components/issue/Detail'
 import { Toaster } from 'react-hot-toast'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
+
 
 function App() {
   
@@ -37,6 +40,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Navigate to="/admin-dashboard"/>}></Route>
         <Route path='/login' element={<Login />}></Route>
+        <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path='/admin-dashboard' element={
           
           <PrivateRoutes>

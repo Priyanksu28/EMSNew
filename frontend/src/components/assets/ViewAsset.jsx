@@ -10,7 +10,7 @@ const View = () => {
     const fetchAsset = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/asset/${id}`,
+          `http://localhost:3000/api/assets/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -32,8 +32,8 @@ const View = () => {
 
   return (
     <>{ asset ? (
-    <div className="max-w-3x1 mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
-      <h2 className="text-2x1 font-bold mb-8 text-center">Asset Details</h2>
+    <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-8 text-center">Asset Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* <div>
           <img
@@ -44,23 +44,23 @@ const View = () => {
         <div>
           
           <div className="flex space-x-3 mb-5">
-            <p className="text-1g font-bold">Asset ID: </p>
+            <p className="text-lg font-bold">Asset ID: </p>
             <p className="font-medium">{asset.assetId}</p>
           </div>
           <div className="flex space-x-3 mb-5">
-            <p className="text-1g font-bold">Model Number: </p>
+            <p className="text-lg font-bold">Model Number: </p>
             <p className="font-medium">{asset.modelNo}</p>
           </div>
           <div className="flex space-x-3 mb-5">
-            <p className="text-1g font-bold">Asset Type: </p>
+            <p className="text-lg font-bold">Asset Type: </p>
             <p className="font-medium">{asset.assetType}</p>
           </div>
           <div className="flex space-x-3 mb-5">
-            <p className="text-1g font-bold">Location: </p>
+            <p className="text-lg font-bold">Location: </p>
             <p className="font-medium">{asset.location}</p>
           </div>
           <div className="flex space-x-3 mb-5">
-            <p className="text-1g font-bold">Department: </p>
+            <p className="text-lg font-bold">Department: </p>
             <p className="font-medium">{asset.department_name}</p>
           </div>
         </div>

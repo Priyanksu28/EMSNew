@@ -2,6 +2,7 @@ import Asset from '../models/Asset.js'
 import Department from '../models/Department.js'
 import multer from 'multer';
 import path from 'path';
+import Assign from '../models/Assign.js';
 
 
 const storage = multer.diskStorage({
@@ -109,12 +110,20 @@ const deleteAsset = async (req, res) => {
 
 const fetchAssetsById = async (req, res) => {
     const {id} = req.params
-
+    console.log('dep id', id);
+    
     try {
-        const assets = await Asset.find({department: id})
-        return res.status(200).json({success: true, assets})
+        const assignedAssets = await Assign.find().distinct('assetId');
+        const assets = await Asset.find({
+            department: id,
+            _id: { $nin: assignedAssets }
+        }).populate('department');
+
+        return res.status(200).json({ success: true, assets });
     } catch (error) {
-        return res.status(500).json({success: false, error: "get assetsByDepId Server Error"})
+        console.error("Error fetching unassigned assets:", error);
+        return res.status(500).json({ success: false, error: "get assetsByDepId Server Error" });
+        // return res.status(500).json({success: false, error: "get assetsByDepId Server Error"})
     }
 }
 

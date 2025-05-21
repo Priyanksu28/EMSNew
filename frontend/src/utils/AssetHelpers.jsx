@@ -44,24 +44,32 @@ export const columns = [
 
 
 export const getAssets = async (id) => {
-    let assets
     try {
-        const response = await axios.get(`http://localhost:3000/api/asset/department/${id}`, {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
-              }
-              
-        })
-        if (response.data.success) {
-            assets = response.data.assets
-        }
-    } catch (error) {
-        if(error.response && !error.response.data.success) {
-            alert(error.response.data.error)
-        }
-    }
-    return assets
+    const res = await axios.get(`http://localhost:3000/api/assets/unassigned/department/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.data.assets;
+  } catch (error) {
+    console.error("Error fetching unassigned assets:", error);
+    return [];
+  }
 }
+
+// export const getUnassignedAssets = async (deptId) => {
+//   try {
+//     const response = await axios.get(`http://localhost:3000/api/assets/unassigned/department/${deptId}`, {
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("token")}`
+//       }
+//     });
+//     return response.data.assets;
+//   } catch (error) {
+//     console.error("Error fetching unassigned assets:", error);
+//     return [];
+//   }
+// };
 
 
 
