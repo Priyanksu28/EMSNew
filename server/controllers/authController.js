@@ -8,8 +8,11 @@ const login = async (req, res) => {
     try {
         const {email, password} = req.body
         const user = await User.findOne({email})
+        console.log(user);
+        
         if(!user) {
             res.status(404).json({success: false, error: "User not found"})
+            console.log("Hi");
             return
         }
 
