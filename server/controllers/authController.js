@@ -7,6 +7,7 @@ import nodemailer from 'nodemailer'
 const login = async (req, res) => {
     try {
         const {email, password} = req.body
+        console.log(email);
         const user = await User.findOne({email})
         console.log(user);
         
@@ -63,7 +64,9 @@ const forgotPassword = async (req, res) => {
         await user.save()
 
         // Create reset URL
-        const resetUrl = `http://localhost:3000/reset-password/${resetToken}`
+        const resetUrl = `http://localhost:5173/reset-password/${resetToken}`
+        console.log("Reset URL:", resetUrl);
+
 
         // Setup nodemailer transporter (configure your SMTP settings)
         let transporter = nodemailer.createTransport({

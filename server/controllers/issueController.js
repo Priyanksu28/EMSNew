@@ -34,27 +34,34 @@ const getIssue = async (req, res) => {
         const { id } = req.params;
         console.log(`getIssue called with id: ${id}`);
 
-        // Find the employee by userId
-        const employee = await Employee.findOne({ id });
+        // Corrected: find employee by userId
+        const employee = await Employee.findOne({ userId: id });
         if (!employee) {
             console.log(`Employee not found for userId: ${id}`);
-            return res.status(404).json({ success: false, error: "Employee not found. Please ensure your employee profile exists." });
+            return res.status(404).json({
+                success: false,
+                error: "Employee not found. Please ensure your employee profile exists.",
+            });
         }
 
-        // Now get issues for this employee
+        // Get issues for this employee
         const issues = await Issue.find({ employeeId: employee._id });
 
         if (!issues || issues.length === 0) {
-            return res.status(200).json({ success: true, issues: [], message: "No issues found for this employee." });
+            return res.status(200).json({
+                success: true,
+                issues: [],
+                message: "No issues found for this employee.",
+            });
         }
 
         return res.status(200).json({ success: true, issues });
-
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({ success: false, error: "Server Error" });
     }
-}
+};
+
 const getIssues = async (req, res) => {
     try {
         const issues = await Issue.find().populate({
@@ -107,17 +114,26 @@ const getIssueDetail = async (req, res) => {
 }
 
 const updateIssue = async (req, res) => {
-    try {
-        const {id} = req.params
-        const issue = await Issue.findByIdAndUpdate({_id: id}, {status: req.body.status})
-        if(!issue) {
-            return res.status(404).json({success: false, error: "Issue not found"})
-        }
-        return res.status(200).json({success: true})
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).json({success: false, error: "Server Error"})
+  try {
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ success: false, error: "Unauthorized" });
     }
-}
+
+    const issue = await Issue.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    );
+
+    if (!issue) {
+      return res.status(404).json({ success: false, error: "Issue not found" });
+    }
+
+    return res.status(200).json({ success: true, message: "Issue status updated", data: issue });
+  } catch (error) {
+    res.status(500).json({ success: false, error: "Error updating issue" });
+  }
+};
+
 
 export {addIssue, getIssue, getIssues, getIssueDetail, updateIssue}
